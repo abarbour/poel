@@ -1,0 +1,14 @@
+Package: poel
+Type: Package
+Title: What the package does (short line)
+Description: More about what it does (maybe more than one line)
+Version: 0.0-1
+Date: 2013-11-15
+Author: Andrew J Barbour
+Maintainer: Andrew J Barbour <andy.barbour@gmail.com>
+URL: Code development: http://github.com/abarbour/poel
+    poel software by R.Wang: http://ow.ly/qRLz5
+    python wrapper by S.Heimann: https://github.com/emolch/kiwi/tree/master/python/tunguska
+License: GPL
+Depends: Rcpp (>= 0.10.4)
+LinkingTo: Rcpp
