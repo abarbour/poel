@@ -1,4 +1,16 @@
-inp <- function(){
+inp <- function(lithology, ...){ UseMethod("inp") }
+inp.lith <- function(lithology, ...){
+    inp(lithology$lith.params, ...)
+}
+inp.default <- function(lithology,
+                obs.depth=0,
+                surface.bc=c("unconfined","confined","whole"),
+                file="myinp",
+                stf.params=list(file="stf/16dayave", src="PR-M", len=16*24),
+                sim.params=list(time.win=1440, time.pts=time.win, accuracy=0.05),
+                well.params=list(name="PR-M", st=0, en=100, rad=0.12),
+                bsm.params=list(name=c("B089","B082"), dist=c(285,442), dep=c(NA,NA)),
+                results.dir="."){
   #   # This is the input file of FORTRAN77 program "poel06" for modeling
   #   # coupled deformation-diffusion processes based on a multi-layered (half-
   #   # or full-space) poroelastic media induced by an injection (pump) of
@@ -91,16 +103,35 @@ inp <- function(){
   #   %(t_files_11_14)s                         |char: t_files(11-14);
   #   #-------------------------------------------------------------------------------
   #   #
+  .inpstring <- function(..., cls=c("int", "dble", "char"), ns=NULL, ne=NULL){
+      cls <- match.arg(cls)
+      vars <- list(...)
+      #print(vars)
+      nms <- paste(names(vars), sep=",")
+      #print(nms)
+      Id <- sprintf("|%s: %s", cls, nms)
+      if (!is.null(ns)){
+          Id <- paste0(Id, "(", paste(c(ns, ne), collapse="-"), ")", collapse=" ")
+      }
+      paste0(Id,";")
+  }
   #   #        GLOBAL MODEL PARAMETERS
   #   #        =======================
   #   # 1. switch for surface conditions:
+  surface.bc <- match.arg(surface.bc)
   #   #    0 = without free surface (whole space),
   #   #    1 = unconfined free surface (p = 0),
   #   #    2 = confined free surface (dp/dz = 0).
+  isurfcon <- switch(surface.bc, whole=0L, unconfined=1L, confined=2L)
   #   # 2. number of data lines of the layered model (<= lmax as defined in
   #   #    "peglobal.h") (see Note below)
+  no_model_lines <- length(lithology)
   #   #-------------------------------------------------------------------------------
+  message(surface.bc)
+  print(paste(isurfcon, .inpstring(isurfcon=NA, cls="int")))
   #   %(isurfcon)i                   |int: isurfcon
+  message(paste(no_model_lines,"model line(s)"))
+  print(paste(no_model_lines, .inpstring(no_model_lines=NA, cls="int")))
   #   %(no_model_lines)i             |int: no_model_lines;
   #   #-------------------------------------------------------------------------------
   #   #
@@ -109,6 +140,16 @@ inp <- function(){
   #   #
   #   # no depth[m] mu[Pa]    nu    nu_u   B     D[m^2/s]   Explanations
   #   #-------------------------------------------------------------------------------
+  message(paste("model:"))
+  mdl.lines <- apply(mdl <- data.frame(no=1:3,
+                          dep=2:4,
+                          mu=3:5,
+                          nu=4:6,
+                          nuu=5:7,
+                          B=6:8,
+                          D=7:9), 1, paste, collapse=" ")
+  print(paste(c("#", names(mdl)),collapse=" "))
+  for (l in mdl.lines) print(l)
   #   %(model)s
   #   #--------------------------end of all inputs------------------------------------
   #   
@@ -125,6 +166,7 @@ inp <- function(){
   #   number of homogeneous sublayers. Errors due to the discretisation are limited
   #   within about 5%% (changeable, see peglobal.h).
 }
+inp(1)
 
 generator <- function(x, ...){ UseMethod("generator") }
 generator.inp <- function(x, ...){
