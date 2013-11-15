@@ -148,7 +148,7 @@ inp.default <- function(lithology,
                           nuu=5:7,
                           B=6:8,
                           D=7:9), 1, paste, collapse=" ")
-  print(paste(c("#", names(mdl)),collapse=" "))
+  print(paste(c("#", names(mdl)), collapse=" "))
   for (l in mdl.lines) print(l)
   #   %(model)s
   #   #--------------------------end of all inputs------------------------------------
