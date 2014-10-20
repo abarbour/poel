@@ -13,4 +13,4 @@ src/*.dll
 
 # RStudio files
 poel.Rproj
-.Rproj.user/
+.Rproj.user
