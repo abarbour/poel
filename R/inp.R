@@ -1,20 +1,19 @@
 #' Construct an input file suitable for \code{poel}
 #' @export
-#' @param lithology, the lithology xxx
+#' @param lith, the lithology xxx
 #' @param ... additional parameters
 #' @family Input-file
 #'
-inp <- function(lithology, ...){ UseMethod("inp") }
+inp <- function(lith, ...){ UseMethod("inp") }
 #' @rdname inp
-#' @method inp lith
-#' @S3method inp lith
-inp.lith <- function(lithology, ...){
-    inp(lithology$lith.params, ...)
+#' @export
+inp.lith <- function(lith, ...){
+  lith <- unclass(lith)
+  inp(lith, ...)
 }
 #' @rdname inp
-#' @method inp default
-#' @S3method inp default
-inp.default <- function(lithology,
+#' @export
+inp.default <- function(lith,
                 obs.depth=0,
                 surface.bc=c("unconfined","confined","whole"),
                 file="myinp",
@@ -23,6 +22,9 @@ inp.default <- function(lithology,
                 well.params=list(name="PR-M", st=0, en=100, rad=0.12),
                 bsm.params=list(name=c("B089","B082"), dist=c(285,442), dep=c(NA,NA)),
                 results.dir=".", ...){
+  #
+  lith <- as.matrix(lith)
+  #
   #   # This is the input file of FORTRAN77 program "poel06" for modeling
   #   # coupled deformation-diffusion processes based on a multi-layered (half-
   #   # or full-space) poroelastic media induced by an injection (pump) of
@@ -126,13 +128,13 @@ inp.default <- function(lithology,
   #switch(surface.bc, whole=0L, unconfined=1L, confined=2L)
   #   # 2. number of data lines of the layered model (<= lmax as defined in
   #   #    "peglobal.h") (see Note below)
-  no_model_lines <- length(lithology)
+  no_model_lines <- nrow(lith)
   #   #-------------------------------------------------------------------------------
   message(surface.bc)
-  print(paste(isurfcon, .inpstring(isurfcon=NA, cls="int")))
+  print(paste(isurfcon, inpstring(isurfcon=NA, cls="int")))
   #   %(isurfcon)i                   |int: isurfcon
   message(paste(no_model_lines,"model line(s)"))
-  print(paste(no_model_lines, .inpstring(no_model_lines=NA, cls="int")))
+  print(paste(no_model_lines, inpstring(no_model_lines=NA, cls="int")))
   #   %(no_model_lines)i             |int: no_model_lines;
   #   #-------------------------------------------------------------------------------
   #   #
@@ -142,15 +144,11 @@ inp.default <- function(lithology,
   #   # no depth[m] mu[Pa]    nu    nu_u   B     D[m^2/s]   Explanations
   #   #-------------------------------------------------------------------------------
   message(paste("model:"))
-  mdl.lines <- apply(mdl <- data.frame(no=1:3,
-                          dep=2:4,
-                          mu=3:5,
-                          nu=4:6,
-                          nuu=5:7,
-                          B=6:8,
-                          D=7:9), 1, paste, collapse=" ")
-  print(paste(c("#", names(mdl)), collapse=" "))
-  for (l in mdl.lines) print(l)
+  #
+  mdl.lines <- apply(lith, 1, paste, collapse=" ")
+  print(paste(c("#", colnames(lith)), collapse=" "))
+  print(as.data.frame(mdl.lines), row.names=FALSE)
+  #for (l in mdl.lines) print(l)
   #   %(model)s
   #   #--------------------------end of all inputs------------------------------------
   #   
@@ -169,17 +167,20 @@ inp.default <- function(lithology,
 }
 #inp(1)
 
-#' Generate a .inp file
+#' Generate an input file suitable to \code{poel}
 #' @param x object
 #' @param ... additional parameters
 #' @export
 #' @family Input-file
 generator <- function(x, ...){ UseMethod("generator") }
+#' @rdname generator
+#' @export
 generator.inp <- function(x, ...){
   #
 }
 
 #' Input line formatter
+#' @details The user should not need to use this function.
 #' @param ... objects to format
 #' @param cls class of the input line
 #' @param ns integer; the beginning index
@@ -188,7 +189,10 @@ generator.inp <- function(x, ...){
 #' @family Input-file
 #|dble: s_start_depth, s_end_depth, s_radius;
 #|char: t_files(1-3);
-.inpstring <- function(..., cls=c("int", "dble", "char"), ns=NULL, ne=NULL){
+#' @examples
+#' inpstring(a=1)
+#' inpstring(a=1,b=1)
+inpstring <- function(..., cls=c("int", "dble", "char"), ns=NULL, ne=NULL){
       cls <- match.arg(cls)
       vars <- list(...)
       nms <- paste(names(vars), collapse=", ")
@@ -200,6 +204,3 @@ generator.inp <- function(x, ...){
       Id <- sprintf("|%s: %s%s", cls, nms, nums)
       return(Id)
 }
-a<-b<-1
-.inpstring(a=1)
-.inpstring(a=1,b=1)
