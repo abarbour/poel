@@ -1,7 +1,19 @@
+#' Construct an input file suitable for \code{poel}
+#' @export
+#' @param lithology, the lithology xxx
+#' @param ... additional parameters
+#' @family Input-file
+#'
 inp <- function(lithology, ...){ UseMethod("inp") }
+#' @rdname inp
+#' @method inp lith
+#' @S3method inp lith
 inp.lith <- function(lithology, ...){
     inp(lithology$lith.params, ...)
 }
+#' @rdname inp
+#' @method inp default
+#' @S3method inp default
 inp.default <- function(lithology,
                 obs.depth=0,
                 surface.bc=c("unconfined","confined","whole"),
@@ -10,7 +22,7 @@ inp.default <- function(lithology,
                 sim.params=list(time.win=1440, time.pts=time.win, accuracy=0.05),
                 well.params=list(name="PR-M", st=0, en=100, rad=0.12),
                 bsm.params=list(name=c("B089","B082"), dist=c(285,442), dep=c(NA,NA)),
-                results.dir="."){
+                results.dir=".", ...){
   #   # This is the input file of FORTRAN77 program "poel06" for modeling
   #   # coupled deformation-diffusion processes based on a multi-layered (half-
   #   # or full-space) poroelastic media induced by an injection (pump) of
@@ -103,18 +115,6 @@ inp.default <- function(lithology,
   #   %(t_files_11_14)s                         |char: t_files(11-14);
   #   #-------------------------------------------------------------------------------
   #   #
-  .inpstring <- function(..., cls=c("int", "dble", "char"), ns=NULL, ne=NULL){
-      cls <- match.arg(cls)
-      vars <- list(...)
-      #print(vars)
-      nms <- paste(names(vars), sep=",")
-      #print(nms)
-      Id <- sprintf("|%s: %s", cls, nms)
-      if (!is.null(ns)){
-          Id <- paste0(Id, "(", paste(c(ns, ne), collapse="-"), ")", collapse=" ")
-      }
-      paste0(Id,";")
-  }
   #   #        GLOBAL MODEL PARAMETERS
   #   #        =======================
   #   # 1. switch for surface conditions:
@@ -122,7 +122,8 @@ inp.default <- function(lithology,
   #   #    0 = without free surface (whole space),
   #   #    1 = unconfined free surface (p = 0),
   #   #    2 = confined free surface (dp/dz = 0).
-  isurfcon <- switch(surface.bc, whole=0L, unconfined=1L, confined=2L)
+  isurfcon <- boundary.condition(surface.bc)$BC.val
+  #switch(surface.bc, whole=0L, unconfined=1L, confined=2L)
   #   # 2. number of data lines of the layered model (<= lmax as defined in
   #   #    "peglobal.h") (see Note below)
   no_model_lines <- length(lithology)
@@ -166,9 +167,39 @@ inp.default <- function(lithology,
   #   number of homogeneous sublayers. Errors due to the discretisation are limited
   #   within about 5%% (changeable, see peglobal.h).
 }
-inp(1)
+#inp(1)
 
+#' Generate a .inp file
+#' @param x object
+#' @param ... additional parameters
+#' @export
+#' @family Input-file
 generator <- function(x, ...){ UseMethod("generator") }
 generator.inp <- function(x, ...){
   #
 }
+
+#' Input line formatter
+#' @param ... objects to format
+#' @param cls class of the input line
+#' @param ns integer; the beginning index
+#' @param ne integer; the ending index
+#' @export
+#' @family Input-file
+#|dble: s_start_depth, s_end_depth, s_radius;
+#|char: t_files(1-3);
+.inpstring <- function(..., cls=c("int", "dble", "char"), ns=NULL, ne=NULL){
+      cls <- match.arg(cls)
+      vars <- list(...)
+      nms <- paste(names(vars), collapse=", ")
+      nums <- if (!is.null(ns)){
+	      sprintf("(%s);",paste(c(ns, ne), collapse="-"))
+      } else {
+	      ";"
+      }
+      Id <- sprintf("|%s: %s%s", cls, nms, nums)
+      return(Id)
+}
+a<-b<-1
+.inpstring(a=1)
+.inpstring(a=1,b=1)

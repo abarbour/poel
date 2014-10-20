@@ -1,2 +1,6 @@
-useDynLib(poel)
-exportPattern("^[[:alpha:]]+")
+S3method(inp,default)
+S3method(inp,lith)
+export(.inpstring)
+export(boundary.condition)
+export(generator)
+export(inp)

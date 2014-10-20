@@ -1,14 +1,24 @@
 Package: poel
 Type: Package
-Title: What the package does (short line)
-Description: More about what it does (maybe more than one line)
+Title: Tools for working with poel
+Description: poel is a code used to simulate poroelastic deformation
+    and fluid flow induced by fluid extraction. This package allows the user
+    to easily generate simulations using poel, from within R.
 Version: 0.0-1
-Date: 2013-11-15
+Date: 2013-12-01
 Author: Andrew J Barbour
 Maintainer: Andrew J Barbour <andy.barbour@gmail.com>
-URL: Code development: http://github.com/abarbour/poel
-    poel software by R.Wang: http://ow.ly/qRLz5
-    python wrapper by S.Heimann: https://github.com/emolch/kiwi/tree/master/python/tunguska
+URL: Code development: http://github.com/abarbour/poel poel software by R.Wang:
+    http://ow.ly/qRLz5 python wrapper by S.Heimann:
+    https://github.com/emolch/kiwi/tree/master/python/tunguska
 License: GPL
-Depends: Rcpp (>= 0.10.4)
+Depends:
+    Rcpp (>= 0.10.4)
 LinkingTo: Rcpp
+Collate:
+    'poel-package.R'
+    'RcppExports.R'
+    'inp.R'
+    'lith.R'
+    'utilities.R'
+    'zzz.R'
