@@ -1,0 +1,19 @@
+\name{boundary.condition}
+\alias{boundary.condition}
+\title{Returns the string and number of the surface boundary condition
+used in \code{poel}}
+\usage{
+  boundary.condition(bc)
+}
+\arguments{
+  \item{bc}{numeric or character; the boundary condition;
+  if this is missing, the full set of values is returned}
+}
+\description{
+  Returns the string and number of the surface boundary
+  condition used in \code{poel}
+}
+\details{
+  "whole","confined","unconfined"
+}
+
