@@ -15,7 +15,7 @@ lithology <- function(Depth,
   ord <- order(Depth)
   L <- cbind(Number, Depth, ShearModulus, Nu, Nuu, Skempton, Diffusivity)[ord, , drop=FALSE]
   class(L) <- 'lith'
-  attr(l,"Units") <- c("","m","Pa","","","","m^2/s")
+  attr(L,"Units") <- c("","m","Pa","","","","m^2/s")
   return(L)
 }
 
@@ -27,10 +27,15 @@ plot.lith <- function(L, no.layout=TRUE, ...){
   ldim <- dim(L)
   nms <- colnames(L)
   #
+  nlay <- ldim[1]
+  if (nlay==1){
+    stop("Cannot plot this lithology -- only a single layer")
+  }
+  #
   layers <- seq_len(ldim[1])
   Deps.t <- Deps[layers[-1]]
   drng <- range(c(0,pretty(1.05*Deps[Deps>0])))
-  
+  #
   PLT <- function(n, ...){
     D <- L[,n]
     Du <- Units[n]

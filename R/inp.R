@@ -178,6 +178,11 @@ generator <- function(x, ...){ UseMethod("generator") }
 generator.inp <- function(x, ...){
   #
 }
+#' @rdname generator
+#' @export
+generator.default <- function(x, ...){
+  #
+}
 
 #' Input line formatter
 #' @details The user should not need to use this function.

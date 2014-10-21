@@ -9,4 +9,8 @@
 #' @aliases poel
 #' @author A.J. Barbour
 #' 
+#' @useDynLib poel
+#' @importFrom Rcpp evalCpp
+#' @exportPattern "^[[:alpha:]]+"
+
 NULL
