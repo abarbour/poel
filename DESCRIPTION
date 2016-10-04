@@ -21,3 +21,4 @@ Depends:
 Suggests:
     beepr
 LinkingTo: Rcpp
+RoxygenNote: 5.0.1
