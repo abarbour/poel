@@ -8,7 +8,7 @@
 lithology(Depth, ShearModulus = 1e+09, Skempton = 0.85, Diffusivity = 0.1,
   Nu = 0.25, Nuu = 0.35, Number = NULL)
 
-\method{plot}{lith}(L, no.layout = TRUE, ...)
+\method{plot}{lith}(L, no.layout = TRUE, add = FALSE, ...)
 }
 \description{
 Lith

@@ -21,7 +21,7 @@ lithology <- function(Depth,
 
 #' @rdname lithology
 #' @export
-plot.lith <- function(L, no.layout=TRUE, ...){
+plot.lith <- function(L, no.layout=TRUE, add=FALSE, plot.inds=c(3,4,5,6,7), ...){
   Units <- attr(L,"Units")
   Deps <- L[,"Depth"]
   ldim <- dim(L)
@@ -36,23 +36,23 @@ plot.lith <- function(L, no.layout=TRUE, ...){
   Deps.t <- Deps[layers[-1]]
   drng <- range(c(0,pretty(1.05*Deps[Deps>0])))
   #
-  PLT <- function(n, ...){
+  PLT <- function(n, add.=FALSE, ...){
     D <- L[,n]
     Du <- Units[n]
     Dnm <- nms[n]
     sf <- stepfun(Deps.t, D)
-    plot(sf, lty=2, pch=NA, xaxs="i", xlab="Depth", main="", ylab=parse(text=Du), ...)
+    if (!add.) plot(sf, lty=2, pch=NA, xaxs="i", xlab="Depth", main="", ylab=parse(text=Du), ...)
     lines(sf, vertical=FALSE, lwd=3, pch=NA, xaxs="i", ...)
     lims <- par("usr")
     text(lims[2]*0.98, lims[4]*0.95, Dnm, pos=2, font=2)
     return(sf)
   }
-  toPlot <- c(3,4,5,6,7)
+  toPlot <- plot.inds
   if (!no.layout){
     layout(matrix(seq_along(toPlot),ncol=1))
   }
   op <- par(mar=c(3.8,4.1,1,1), mgp=c(2.5,1,0), las=1, lend="butt")
   on.exit(par(op))
   #
-  invisible(lapply(toPlot, PLT, xlim=drng, ...))
+  invisible(lapply(toPlot, PLT, xlim=drng, add.=add, ...))
 }
