@@ -17,11 +17,10 @@ URL: R-code development by AJB: http://github.com/abarbour/poel,
 License: GPL3
 Encoding: UTF-8
 LazyData: true
-Depends:
-    Rcpp (>= 0.12.8),
-    tidyverse
 Imports:
-    plyr
+    Rcpp (>= 0.12.8),
+    plyr,
+    tidyverse
 Suggests:
     beepr,
     covr,
