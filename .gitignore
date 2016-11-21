@@ -1,3 +1,7 @@
+# Vim files
+.*.swp
+
+# Compile files
 src/*.o
 src/*.so
 src/*.dll

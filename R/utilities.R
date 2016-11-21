@@ -2,7 +2,7 @@
 #' used in \code{poel}
 #' @details
 #' "whole","confined","unconfined"
-#' @export
+# @export
 #' @param bc numeric or character; the boundary condition; if this
 #'             is missing, the full set of values is returned
 #'

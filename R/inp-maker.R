@@ -1,18 +1,17 @@
 #' Construct an input file suitable for \code{poel}
-#' @export
+# @export
 #' @param lith, the lithology xxx
 #' @param ... additional parameters
-#' @family Input-file
 #'
 inp <- function(lith, ...){ UseMethod("inp") }
 #' @rdname inp
-#' @export
+# @export
 inp.lith <- function(lith, ...){
   lith <- unclass(lith)
   inp(lith, ...)
 }
 #' @rdname inp
-#' @export
+# @export
 inp.default <- function(lith,
                 obs.depth=0,
                 surface.bc=c("unconfined","confined","whole"),
@@ -151,14 +150,14 @@ inp.default <- function(lith,
   #for (l in mdl.lines) print(l)
   #   %(model)s
   #   #--------------------------end of all inputs------------------------------------
-  #   
+  #
   #   Note for the model input format and the step-function approximation for models
   #   with depth gradient:
-  #     
+  #
   #     The surface and the upper boundary of the half-space as well as the interfaces
   #   at which the poroelastic parameters are continuous, are all defined by a single
   #   data line; All other interfaces, at which the poroelastic parameters are
-  #   discontinuous, are all defined by two data lines (upper-side and lower-side values). 
+  #   discontinuous, are all defined by two data lines (upper-side and lower-side values).
   #   This input format would also be needed for a graphic plot of the
   #   layered model. Layers which have different parameter values at top and bottom,
   #   will be treated as layers with a constant gradient, and will be discretised to a
@@ -167,31 +166,13 @@ inp.default <- function(lith,
 }
 #inp(1)
 
-#' Generate an input file suitable to \code{poel}
-#' @param x object
-#' @param ... additional parameters
-#' @export
-#' @family Input-file
-generator <- function(x, ...){ UseMethod("generator") }
-#' @rdname generator
-#' @export
-generator.inp <- function(x, ...){
-  #
-}
-#' @rdname generator
-#' @export
-generator.default <- function(x, ...){
-  #
-}
-
 #' Input line formatter
 #' @details The user should not need to use this function.
 #' @param ... objects to format
 #' @param cls class of the input line
 #' @param ns integer; the beginning index
 #' @param ne integer; the ending index
-#' @export
-#' @family Input-file
+# @export
 #|dble: s_start_depth, s_end_depth, s_radius;
 #|char: t_files(1-3);
 #' @examples
