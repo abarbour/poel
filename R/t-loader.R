@@ -63,7 +63,7 @@ read_t <- function(fi, version=2012){
 #' @rdname poel-t-methods
 #' @inheritParams read_t
 #' @param n integer; the maximum number of indices to print
-#' @export
+# @export
 #' @seealso \code{\link{read_t}} \code{\link{read_inp}}
 `print.poel-t` <- function(x, n=100){
     message("  poel results (.t file): ", x[['File']])

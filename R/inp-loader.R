@@ -21,14 +21,12 @@ read_inp <- function(fi, version=2012){
 	# Setup some internal functions for parsing
 	.splitter <- function(x., keep, TRANS=NULL, Stage=NULL){
 	    if (!is.null(Stage)) message("parsing stage: ", Stage)
-	    print(x.)
-		x. <- unlist(strsplit(trimws(x.),  " "))
+	    x. <- unlist(strsplit(trimws(x.),  " "))
 		nc0 <- sapply(x., nchar) == 0
 		x. <- x.[!nc0]
 		if (missing(keep)) keep <- seq_along(x.)
 		kept <- x.[keep]
-		print(kept)
-		print("---")
+		message(" + content: ", paste(kept, collapse="\t"))
 		if (!missing(TRANS)){
 			stopifnot(inherits(TRANS, 'function'))
 			kept <- TRANS(kept)
@@ -306,3 +304,11 @@ read_inp <- function(fi, version=2012){
     message("Boundary conditions: ", PC[['BC']][['Surface']])
 }
 
+#' @rdname poel-inp-methods
+#' @export
+get_lith <- function(x, ...) UseMethod('get_lith')
+#' @rdname poel-inp-methods
+#' @export
+`get_lith.poel-inp` <- function(x, ...){
+    x[['Parsed.Content']][['Layers']]
+}

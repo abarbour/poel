@@ -1,13 +1,31 @@
 #' @title Poel's lithology structure
 #' @description Manipulate or generate poel-type lithology specifications
 #' @export
+#' @aliases lith
 #' @examples
+#'
 #' # just do something random to demonstrate
+#' set.seed(1234)
+#'
 #' n <- 5 # five layers
 #' deps <- seq_len(n)-1 # at these depths
 #' rand <- runif(n)
+#'
 #' (l <- lithology(deps, rand, rand, rand))
 #' is.lith(l)
+#'
+#' # plot values
+#' plot(l)
+#'
+#' # Functions for plotting lith params at any depth:
+#' funs <- depth_param_functions(l)
+#'
+#' HD <- funs[['Diffusivity']]
+#' # get many more values than there were before
+#' new.depths <- sort(jitter(rep(deps, each=n)))
+#' new.hd <- HD(new.depths)
+#' plot(new.depths, new.hd, type='l')
+#'
 lithology <- function(Depth,
                       ShearModulus=1.e9, Skempton=0.85, Diffusivity=0.1,
                       Nu=0.25, Nuu=0.35, Number=NULL){
@@ -82,3 +100,24 @@ plot.lith <- function(L, no.layout=TRUE, add=FALSE, plot.inds=c(3,4,5,6,7), ...)
   #
   invisible(lapply(toPlot, PLT, xlim=drng, add.=add, ...))
 }
+
+#' @rdname lithology
+#' @export
+depth_param_functions <- function(x, ...) UseMethod('depth_param_functions')
+
+#' @rdname lithology
+#' @export
+depth_param_functions.lith <- function(x, ...){
+    stopifnot(is.lith(x))
+    all.params <- colnames(x)
+    params <- all.params[!(all.params %in% c('Number','Depth'))]
+    .depths. <- x[,'Depth']
+    .GetDepFun <- function(param.name){
+        X <- .depths.
+        Y <- x[, param.name]
+        stats::approxfun(X, Y, method='constant', rule=2, f=1)
+    }
+    names(params) <- params
+    plyr::llply(params, .GetDepFun)
+}
+

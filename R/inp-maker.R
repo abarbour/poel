@@ -3,16 +3,16 @@
 #' @param lith, the lithology xxx
 #' @param ... additional parameters
 #'
-inp <- function(lith, ...){ UseMethod("inp") }
-#' @rdname inp
+make_inp <- function(lith, ...){ UseMethod("make_inp") }
+#' @rdname make_inp
 # @export
-inp.lith <- function(lith, ...){
+make_inp.lith <- function(lith, ...){
   lith <- unclass(lith)
   inp(lith, ...)
 }
-#' @rdname inp
+#' @rdname make_inp
 # @export
-inp.default <- function(lith,
+make_inp.default <- function(lith,
                 obs.depth=0,
                 surface.bc=c("unconfined","confined","whole"),
                 file="myinp",
