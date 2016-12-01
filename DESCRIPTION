@@ -1,17 +1,18 @@
 Package: poel
 Type: Package
 Title: Tools to facilitate working with poel
-Description: poel is a Fortran-77 code
-    useful for simulating poroelastic deformation
+Description: poel is a spectral-element code
+    for simulating poroelastic deformation
     and fluid flow induced by fluid extraction. This package 
     allows the useR to easily generate and read input files, and
-    manipualte and vizualize simulation results.
-Version: 0.0-3
-Date: 2016-11-20
+    manipulate and vizualize simulation results.
+Version: 0.0-4
+Date: 2016-11-30
 Author: Andrew J Barbour
 Maintainer: AJB <andy.barbour@gmail.com>
 URL: R-code development by AJB: http://github.com/abarbour/poel,
-    Original poel software by R.Wang: http://ow.ly/qRLz5,
+    Original poel software by R.Wang: https://goo.gl/wA8iKR
+    (direct download: https://goo.gl/NSv96i),
     python wrapper by S.Heimann:
     https://github.com/emolch/kiwi/tree/master/python/tunguska/poel.py
 License: GPL3
