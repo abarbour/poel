@@ -312,3 +312,16 @@ get_lith <- function(x, ...) UseMethod('get_lith')
 `get_lith.poel-inp` <- function(x, ...){
     x[['Parsed.Content']][['Layers']]
 }
+
+#' @rdname poel-inp-methods
+#' @export
+get_injsrc <- function(x, ...) UseMethod('get_injsrc')
+#' @rdname poel-inp-methods
+#' @export
+`get_injsrc.poel-inp` <- function(x, ...){
+    # Source-time function information, including
+    #$Depth -- injection interval
+    #$Rad -- source radius
+    #$STF -- the stf
+    x[['Parsed.Content']][['Source']]
+}
