@@ -3,7 +3,8 @@ Type: Package
 Title: Tools to facilitate working with poel
 Description: poel is a spectral-element code
     for simulating poroelastic deformation
-    and fluid flow induced by fluid extraction. This package 
+    and fluid flow induced by fluid injection or extraction from
+    a well. This package 
     allows the useR to easily generate and read input files, and
     manipulate and vizualize simulation results.
 Version: 0.0-5
