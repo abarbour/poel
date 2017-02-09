@@ -14,6 +14,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom readr read_table read_lines
 #' @importFrom plyr ldply llply
+#' @importFrom fields image.plot
 #' @importFrom Rcpp evalCpp
 #' @importFrom stats approxfun
 #' @exportPattern "^[[:alpha:]]+"

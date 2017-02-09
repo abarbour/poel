@@ -30,7 +30,9 @@ Functions to investigate sensitivity of normalized-parameters
 Poisson's ratio
 
 \code{\link{poel_alpha}} gives the effective stress coefficient, normalized by
-\eqn{1 / B} where B is Skempton's coefficient
+\eqn{1 / B} where \eqn{B} is Skempton's coefficient. Hence, to obtain Biot's pore
+pressure coefficient (generally written as \eqn{\alpha}) take this value and
+divide by \eqn{B}.
 
 \code{\link{poel_beta}} gives the bulk compressibility, normalized by
 \eqn{1 / \mu / B^2}
@@ -46,5 +48,19 @@ a2/a1
 
 # try multiple values
 poel_alpha(0.25,seq(0,1,by=0.1))
+
+# Make a sensitivity matrix
+# Poisson's ratios
+nu <- nuu <- seq(0,0.5,by=0.01)
+alpgrd <- outer(nu, nuu, "poel_alpha")
+B <- 0.75 # Skempton's coefficient
+biot <- alpgrd/B
+
+fields::image.plot(nu, nuu, biot, asp=1)
+contour(nu, nuu, biot, add=TRUE)
+
+}
+\references{
+H.-J. Kümpel; Poroelasticity: parameters reviewed. Geophys J Int 1991; 105 (3): 783-799. doi: 10.1111/j.1365-246X.1991.tb00813.x
 }
 
