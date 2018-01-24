@@ -25,3 +25,4 @@ The user should not need to use this function.
 inpstring(a=1)
 inpstring(a=1,b=1)
 }
+

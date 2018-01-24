@@ -4,27 +4,30 @@ Title: Tools to facilitate working with simulations from poel
 Description: 'poel' is a spectral-element code
     for simulating poroelastic deformation
     and fluid flow induced by fluid injection or extraction from
-    a well. This package 
+    a well. This package
     allows the useR to easily generate and read input files, and
     manipulate and vizualize simulation results.
 Version: 0.0-7
 Date: 2018-01-24
 Author: Andrew J Barbour
 Maintainer: AJB <andy.barbour@gmail.com>
-URL: R-code development by AJB: http://github.com/abarbour/poel,
-    Original poel software (FORTRAN) by R.Wang: https://goo.gl/wA8iKR
+URL: R-code development (http://github.com/abarbour/poel) by AJB, and
+    original poel software (FORTRAN) by R.Wang: https://goo.gl/wA8iKR
     (direct download: https://goo.gl/NSv96i)
 License: GPL3
 Encoding: UTF-8
 LazyData: true
 Imports:
     Rcpp (>= 0.12.8),
+    readr,
+    magrittr,
+    dplyr,
     plyr,
-    tidyverse,
     fields
 Suggests:
+    tidyverse,
     beepr,
     covr,
     testthat
 LinkingTo: Rcpp
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1

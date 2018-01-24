@@ -18,3 +18,4 @@ used in \code{poel}
 \details{
 "whole","confined","unconfined"
 }
+

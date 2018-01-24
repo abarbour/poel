@@ -15,3 +15,4 @@ Methods for 'poel-t' class
 \seealso{
 \code{\link{read_t}} \code{\link{read_inp}}
 }
+
