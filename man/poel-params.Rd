@@ -2,10 +2,10 @@
 % Please edit documentation in R/utilities.R
 \name{poel-params}
 \alias{poel-params}
+\alias{poel_lambda}
 \alias{poel_alpha}
 \alias{poel_beta}
 \alias{poel_chi}
-\alias{poel_lambda}
 \title{Parameter sensitivity to Poisson's ratio}
 \usage{
 poel_lambda(nu)
@@ -63,4 +63,3 @@ contour(nu, nuu, biot, add=TRUE)
 \references{
 H.-J. Kümpel; Poroelasticity: parameters reviewed. Geophys J Int 1991; 105 (3): 783-799. doi: 10.1111/j.1365-246X.1991.tb00813.x
 }
-

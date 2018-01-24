@@ -30,4 +30,3 @@ print(res2)
 \seealso{
 \code{\link{read_t}}
 }
-

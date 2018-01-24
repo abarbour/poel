@@ -22,4 +22,3 @@ print(res)
 \seealso{
 \code{\link{read_inp}}
 }
-

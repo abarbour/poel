@@ -1,14 +1,14 @@
 Package: poel
 Type: Package
-Title: Tools to facilitate working with poel
-Description: poel is a spectral-element code
+Title: Tools to facilitate working with simulations from poel
+Description: 'poel' is a spectral-element code
     for simulating poroelastic deformation
     and fluid flow induced by fluid injection or extraction from
     a well. This package 
     allows the useR to easily generate and read input files, and
     manipulate and vizualize simulation results.
-Version: 0.0-6
-Date: 2017-02-08
+Version: 0.0-7
+Date: 2018-01-24
 Author: Andrew J Barbour
 Maintainer: AJB <andy.barbour@gmail.com>
 URL: R-code development by AJB: http://github.com/abarbour/poel,
@@ -27,4 +27,4 @@ Suggests:
     covr,
     testthat
 LinkingTo: Rcpp
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

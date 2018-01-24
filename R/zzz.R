@@ -21,7 +21,7 @@
   ##psd:::psd_envAssign("init", "initialized upon attach")
   ##
   pack <- "poel"
-  packageStartupMessage(sprintf("Loaded %s (%s) -- tools for working with poel simulations",
+  packageStartupMessage(sprintf("Loaded %s (%s) -- tools for working with poroelastic simulations from poel",
                                 pack,
                                 utils::packageVersion(pack)))
 }
