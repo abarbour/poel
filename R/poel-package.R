@@ -10,9 +10,9 @@
 #' @author A.J. Barbour
 #'
 # @useDynLib poel
-#' @importFrom dplyr tbl_df
-#' @importFrom magrittr %>%
-#' @importFrom readr read_table read_lines
+# @importFrom dplyr tbl_df
+# @importFrom magrittr %>%
+# @importFrom readr read_table read_lines
 #' @importFrom plyr ldply llply
 #' @importFrom fields image.plot
 #' @importFrom Rcpp evalCpp
