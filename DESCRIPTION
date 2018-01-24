@@ -21,7 +21,10 @@ Imports:
     Rcpp (>= 0.12.8),
     plyr,
     tidyverse,
-    fields
+    fields,
+    dplyr,
+    magrittr,
+    readr
 Suggests:
     beepr,
     covr,
