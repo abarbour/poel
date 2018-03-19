@@ -92,3 +92,30 @@ poel_chi <- function(nu, nuu){
   res[nuu < nu] <- NA
   return(res)
 }
+
+#' @title Convert vector into step-like vector
+#' @description Take a vector of values (with some set of indices)
+#' and create a step-like function by shifting indices.
+#' @details This will be useful for creating source-time-functions
+#' from realistic data, that are formatted appropriately for poel.
+#' @param x,y numeric vectors giving the coordinates of the points to be
+#' converted into a step-like function
+#' @export
+#' @examples 
+#' 
+#' SV <- stepvec(seq_len(10), rnorm(10))
+#' SV
+#' 
+#' \dontrun{
+#' plot(y ~ x, SV, type='b')
+#' }
+stepvec <- function(x, y){
+  x <- as.vector(x)
+  y <- as.vector(y)
+  x.. <- rep(x, each=2)
+  y.. <- rep(y, each=2)
+  nx <- length(x..)
+  xstep <- x..[-1]
+  ystep <- y..[-nx]
+  data.frame(n=seq_along(xstep), x=xstep, y=ystep)
+}

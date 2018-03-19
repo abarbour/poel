@@ -7,8 +7,8 @@ Description: 'poel' is a spectral-element code
     a well. This package
     allows the useR to easily generate and read input files, and
     manipulate and vizualize simulation results.
-Version: 0.0-7
-Date: 2018-01-24
+Version: 0.0-8
+Date: 2018-03-19
 Author: Andrew J Barbour
 Maintainer: AJB <andy.barbour@gmail.com>
 URL: R-code development (http://github.com/abarbour/poel) by AJB, and
@@ -30,4 +30,4 @@ Suggests:
     covr,
     testthat
 LinkingTo: Rcpp
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

@@ -2,8 +2,8 @@
 % Please edit documentation in R/inp-maker.R
 \name{make_inp}
 \alias{make_inp}
-\alias{make_inp.default}
 \alias{make_inp.lith}
+\alias{make_inp.default}
 \title{Construct an input file suitable for \code{poel}}
 \usage{
 make_inp(lith, ...)
@@ -25,4 +25,3 @@ make_inp(lith, ...)
 \description{
 Construct an input file suitable for \code{poel}
 }
-

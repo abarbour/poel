@@ -2,8 +2,8 @@
 % Please edit documentation in R/poel-package.R
 \docType{package}
 \name{poel-package}
-\alias{poel}
 \alias{poel-package}
+\alias{poel}
 \title{poel}
 \description{
 Description
@@ -14,4 +14,3 @@ Details
 \author{
 A.J. Barbour
 }
-
