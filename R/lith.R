@@ -115,7 +115,7 @@ depth_param_functions.lith <- function(x, ...){
     .GetDepFun <- function(param.name){
         X <- .depths.
         Y <- x[, param.name]
-        stats::approxfun(X, Y, method='constant', rule=2, f=1)
+        stats::approxfun(X, Y, method='constant', rule=2, f=0, ties = function(z){z[length(z)]})
     }
     names(params) <- params
     plyr::llply(params, .GetDepFun)
