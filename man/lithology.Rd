@@ -9,13 +9,13 @@
 \alias{depth_param_functions.lith}
 \title{Poel's lithology structure}
 \usage{
-lithology(Depth, ShearModulus = 1e+09, Skempton = 0.85, Diffusivity = 0.1,
-  Nu = 0.25, Nuu = 0.35, Number = NULL)
+lithology(Depth, ShearModulus = 1e+09, Skempton = 0.85,
+  Diffusivity = 0.1, Nu = 0.25, Nuu = 0.35, Number = NULL)
 
 is.lith(x, ...)
 
-\method{plot}{lith}(L, no.layout = TRUE, add = FALSE, plot.inds = c(3, 4,
-  5, 6, 7), ...)
+\method{plot}{lith}(L, no.layout = TRUE, add = FALSE,
+  plot.inds = c(3, 4, 5, 6, 7), ...)
 
 depth_param_functions(x, ...)
 

@@ -10,12 +10,13 @@ make_inp(lith, ...)
 
 \method{make_inp}{lith}(lith, ...)
 
-\method{make_inp}{default}(lith, obs.depth = 0, surface.bc = c("unconfined",
-  "confined", "whole"), file = "myinp", stf.params = list(file =
-  "stf/16dayave", src = "PR-M", len = 16 * 24), sim.params = list(time.win =
-  1440, time.pts = time.win, accuracy = 0.05), well.params = list(name =
-  "PR-M", st = 0, en = 100, rad = 0.12), bsm.params = list(name = c("B089",
-  "B082"), dist = c(285, 442), dep = c(NA, NA)), results.dir = ".", ...)
+\method{make_inp}{default}(lith, obs.depth = 0,
+  surface.bc = c("unconfined", "confined", "whole"), file = "myinp",
+  stf.params = list(file = "stf/16dayave", src = "PR-M", len = 16 * 24),
+  sim.params = list(time.win = 1440, time.pts = time.win, accuracy =
+  0.05), well.params = list(name = "PR-M", st = 0, en = 100, rad = 0.12),
+  bsm.params = list(name = c("B089", "B082"), dist = c(285, 442), dep =
+  c(NA, NA)), results.dir = ".", ...)
 }
 \arguments{
 \item{lith, }{the lithology xxx}
